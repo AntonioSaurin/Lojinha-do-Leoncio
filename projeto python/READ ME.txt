@@ -1,0 +1,5 @@
+ESSA BOMBA TEM O IMPORT INTEIRO DO KIVY KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK
+
+Ta tendo uma simplistica tela de login e a de menu, contendo o script de troca de tela e de guardar variavel
+
+Tentei deixar comentadinho entao deve ta de boa de entender, mas caso algo tenho ficado confuso me pergunta ai

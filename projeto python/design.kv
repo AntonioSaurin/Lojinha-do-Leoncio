@@ -1,0 +1,80 @@
+#:kivy 2.1.0
+
+#:import utils kivy.utils
+
+<LoginScreen>
+
+
+    #define as variaveis que serao passadas pro documento.py
+    user:user
+    password:password
+
+    BoxLayout:
+
+        orientation: "vertical"
+        size: root.width, root.height
+
+        padding: 50
+        spacing: 15
+
+
+        Label:
+            text: "Usuario"
+            font_size: 32
+        TextInput:
+            id:user
+            multiline:False
+            font_size: 32
+            size_hint: (1,0.5)
+
+        
+        Label:
+            text: "Senha"
+            font_size: 32
+        TextInput:
+            id:password
+            multiline:False
+            font_size: 32
+            size_hint: (1,0.5)
+
+
+        Button:
+            text: "submit"
+            font_size: 32
+            on_press: root.press()
+            pos_hint: {'center_x': .5}
+            size_hint: (0.5,0.5)
+            
+<MenuScreen>
+    BoxLayout:
+
+        size: root.width, root.height
+        orientation: "vertical"
+
+        padding: 50
+        spacing: 15
+
+
+        Label:
+            text: "LOJINHA DO LEONCIO"
+            font_size: 32
+        Button:
+            text: 'Ver estoque da loja'
+            size_hint: (1,0.5)
+        Button:
+            text: 'Adicionar Item'
+            size_hint: (1,0.5)
+        Button:
+            text: 'Modificar Item'
+            size_hint: (1,0.5)
+        Button:
+            text: 'Apagar item'
+            size_hint: (1,0.5)
+        Button:
+            text: 'Sair'
+            pos_hint: {'center_x': .5}
+            size_hint: (0.5,0.5)
+            
+            #Troca a tela para o login
+            on_press: root.manager.current = 'login'
+
