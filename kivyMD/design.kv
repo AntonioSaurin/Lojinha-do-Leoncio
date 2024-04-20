@@ -5,12 +5,14 @@ MDScreen:
         text: "Loja do Leoncio"
         pos_hint: {"center_x": .5, "center_y": .85}
         halign: "center"
+        font_style: "Display"
     
     MDTextField:
+        id: "user"
         mode: "outlined"
         size_hint_x: None
         width: "500dp"
-        pos_hint: {"center_x": .5, "center_y": .5}
+        pos_hint: {"center_x": .5, "center_y": .65}
 
         MDTextFieldLeadingIcon:
             icon: "account"
@@ -18,16 +20,24 @@ MDScreen:
         MDTextFieldHintText:
             text: "Usuario"
 
-        MDTextFieldHelperText:
-            text: "Helper text"
-            mode: "persistent"
+    MDTextField:
+        id: "password"
+        mode: "outlined"
+        size_hint_x: None
+        width: "500dp"
+        pos_hint: {"center_x": .5, "center_y": .50}
+        password: True
 
-        MDTextFieldTrailingIcon:
-            icon: "information"
+        MDTextFieldLeadingIcon:
+            icon: "account"
+
+        MDTextFieldHintText:
+            text: "Senha"
 
     MDButton:
         style: "elevated"
-        pos_hint: {"center_x": .5, "center_y": .4}
+        pos_hint: {"center_x": .5, "center_y": .35}
 
         MDButtonText:
             text: "Logar"
+            font_style: "Title"
