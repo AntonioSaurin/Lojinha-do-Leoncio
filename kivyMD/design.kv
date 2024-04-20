@@ -2,9 +2,28 @@ MDScreen:
     md_bg_color: app.theme_cls.surfaceColor
 
     MDLabel:
-        text: "Hello World"
-        pos_hint: {"center_x": .5, "center_y": .5}
+        text: "Loja do Leoncio"
+        pos_hint: {"center_x": .5, "center_y": .85}
         halign: "center"
+    
+    MDTextField:
+        mode: "outlined"
+        size_hint_x: None
+        width: "500dp"
+        pos_hint: {"center_x": .5, "center_y": .5}
+
+        MDTextFieldLeadingIcon:
+            icon: "account"
+
+        MDTextFieldHintText:
+            text: "Usuario"
+
+        MDTextFieldHelperText:
+            text: "Helper text"
+            mode: "persistent"
+
+        MDTextFieldTrailingIcon:
+            icon: "information"
 
     MDButton:
         style: "elevated"
