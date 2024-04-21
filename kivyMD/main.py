@@ -6,6 +6,8 @@ from kivymd.uix.screen import MDScreen
 from kivymd.uix.button import *
 from kivymd.uix.screenmanager import MDScreenManager
 
+
+
 import mysql.connector
 
 #Aqui é onde passa o endereço da instancia do banco, junto com o login e a senha + o nome da database
@@ -40,7 +42,7 @@ class LoginScreen(MDScreen):
         if result:
             print(result)
             if password == result[0][2]:
-                print
+                print("Login funcionou")
             else:
                 print("Senha incorreta")
         else:
@@ -50,16 +52,21 @@ class MenuScreen(MDScreen):
     pass
 
 
-class MainApp(MDApp):
+class MainApp(MDApp):    
     def build(self):
-        MDApp.title = "Lojinha do Leoncio"
-
         self.theme_cls.theme_style = "Light"
         self.theme_cls.primary_palette = "Pink"
 
+
+        MDApp.title = "Lojinha do Leoncio"
+
+        sm = MDScreenManager()
+        sm.add_widget(LoginScreen(name='login'))
+        sm.add_widget(MenuScreen(name='menu'))
+
         # sm.add_widget(LoginScreen(name='login'))
 
-        return 
+        return sm
     
 if __name__ == '__main__':
     MainApp().run()

@@ -1,4 +1,8 @@
-MDScreen:
+#:kivy 2.1.0
+
+#:import utils kivy.utils
+
+<LoginScreen>:
 
     md_bg_color: app.theme_cls.surfaceColor
 
@@ -12,7 +16,7 @@ MDScreen:
         font_style: "Display"
     
     MDTextField:
-        id: "user"
+        id: user
         mode: "outlined"
         size_hint_x: None
         width: "500dp"
@@ -25,7 +29,7 @@ MDScreen:
             text: "Usuario"
 
     MDTextField:
-        id: "password"
+        id: password
         mode: "outlined"
         size_hint_x: None
         width: "500dp"
