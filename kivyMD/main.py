@@ -23,6 +23,7 @@ cursor = db.cursor()
 
 Builder.load_file("design.kv") 
 
+
 class LoginScreen(MDScreen):
     
     #Aqui é definido as variaveis dos inputs do design.kv
@@ -42,7 +43,7 @@ class LoginScreen(MDScreen):
         if result:
             print(result)
             if password == result[0][2]:
-                print("Login funcionou")
+                sm.current = "menu"
             else:
                 print("Senha incorreta")
         else:
@@ -60,13 +61,16 @@ class MainApp(MDApp):
 
         MDApp.title = "Lojinha do Leoncio"
 
+        # sm.add_widget(LoginScreen(name='login'))
+        global sm
+        
         sm = MDScreenManager()
+
         sm.add_widget(LoginScreen(name='login'))
         sm.add_widget(MenuScreen(name='menu'))
 
-        # sm.add_widget(LoginScreen(name='login'))
-
         return sm
+        
     
 if __name__ == '__main__':
     MainApp().run()
