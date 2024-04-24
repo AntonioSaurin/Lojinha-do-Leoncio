@@ -55,7 +55,7 @@ class LoginScreen(MDScreen):
 class LojaScreen(MDScreen):
     def searching(self):
         data = self.search.text
-        # self.ids.container.remove_widget('MDListItem')
+        self.ids.container.clear_widgets()
 
         if data == '':
             cursor.execute("SELECT * FROM itens")

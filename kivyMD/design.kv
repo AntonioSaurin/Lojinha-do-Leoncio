@@ -59,7 +59,7 @@
     MDBoxLayout:
         orientation:"vertical"
         MDNavigationBar:
-            padding: 100, 30, 100, 30
+            padding: 50, 30, 50, 30
             spacing: 10
             orientation:"horizontal"
 
@@ -77,6 +77,15 @@
                 style: "small"
                 pos_hint: {"center_x": .5, "center_y": .65}
                 on_press: root.searching()
+            
+            MDButton:
+                style: "elevated"
+                pos_hint: {"center_x": .5, "center_y": .65}
+                on_press: root.exit()
+                MDButtonText:
+                    text: "Voltar"
+                    font_style: "Title"
+
 
 
 
