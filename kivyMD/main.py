@@ -45,6 +45,7 @@ class LoginScreen(MDScreen):
         if result:
             print(result)
             if password == result[0][2]:
+                self.password.text = ''
                 sm.current = "loja"
             else:
                 print("Senha incorreta")
@@ -52,29 +53,63 @@ class LoginScreen(MDScreen):
             print("nenhum registro")
 
 class LojaScreen(MDScreen):
-    def on_enter(self):
-        for x in range(25):
-            self.ids.container.add_widget(
-                MDListItem(
-                    MDListItemLeadingIcon(
-                        icon="shopping",
-                    ),
-                    MDListItemHeadlineText(
-                        text=f"Item {x}",
-                    ),
-                    MDListItemSupportingText(
-                        text=f"{x * 100}g",
-                    ),    
-                    MDListItemTertiaryText(
-                        text="Descricao mt foda do item de numero {x}",
-                        padding= [0, 10, 0, 0],
-                    ),
-                    
-                    pos_hint={"center_x": .5, "center_y": .5},
-                    size_hint_x=0.8,
-                    divider=True,
-                ) 
-            )
+    def searching(self):
+        data = self.search.text
+        self.ids.container.remove_widget('MDListItem')
+
+        if data == '':
+            cursor.execute("SELECT * FROM itens")
+            result = cursor.fetchall()
+            for x in result:
+                print(x)
+                self.ids.container.add_widget(
+                    MDListItem(
+                        MDListItemLeadingIcon(
+                            icon="shopping",
+                        ),
+                        MDListItemHeadlineText(
+                            text=f"{x[1]}",
+                        ),
+                        MDListItemSupportingText(
+                            text=f"{x[2]}g",
+                        ),    
+                        MDListItemTertiaryText(
+                            text=f"{x[3]}",
+                            padding= [0, 10, 0, 0],
+                        ),
+                        
+                        pos_hint={"center_x": .5, "center_y": .5},
+                        size_hint_x=0.8,
+                        divider=True,
+                    ) 
+                )
+        else:
+            cursor.execute("SELECT * FROM itens WHERE description = %s", (data, ))
+            result = cursor.fetchall()
+
+            for x in result:
+                print(x)
+                self.ids.container.add_widget(
+                    MDListItem(
+                        MDListItemLeadingIcon(
+                            icon="shopping",
+                        ),
+                        MDListItemHeadlineText(
+                            text=f"{x[1]}",
+                        ),
+                        MDListItemSupportingText(
+                            text=f"{x[2]}g",
+                        ),    
+                        MDListItemTertiaryText(
+                            text=f"{x[3]}",
+                            padding= [0, 10, 0, 0],
+                        ),
+                        
+                        pos_hint={"center_x": .5, "center_y": .5},
+                        size_hint_x=0.8,
+                        divider=True,
+                    ) 
+                )
                
 
 

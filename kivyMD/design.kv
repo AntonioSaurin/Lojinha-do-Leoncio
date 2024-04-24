@@ -54,7 +54,7 @@
 <LojaScreen>
 
     md_bg_color: app.theme_cls.surfaceColor
-    password:search
+    search:search
 
     MDBoxLayout:
         orientation:"vertical"
@@ -76,6 +76,7 @@
                 icon: "magnify"
                 style: "small"
                 pos_hint: {"center_x": .5, "center_y": .65}
+                on_press: root.searching()
 
 
 
