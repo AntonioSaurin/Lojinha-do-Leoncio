@@ -5,7 +5,7 @@ from kivymd.uix.label import MDLabel
 from kivymd.uix.screen import MDScreen
 from kivymd.uix.button import *
 from kivymd.uix.screenmanager import MDScreenManager
-
+from kivymd.uix.list import MDListItemSupportingText, MDListItem, MDListItemHeadlineText, MDListItemLeadingIcon, MDListItemTertiaryText
 
 
 import mysql.connector
@@ -29,6 +29,8 @@ class LoginScreen(MDScreen):
     #Aqui é definido as variaveis dos inputs do design.kv
     user = ObjectProperty(None)
     password = ObjectProperty(None)
+    search = ObjectProperty(None)
+
 
     def press(self):
 
@@ -43,14 +45,37 @@ class LoginScreen(MDScreen):
         if result:
             print(result)
             if password == result[0][2]:
-                sm.current = "menu"
+                sm.current = "loja"
             else:
                 print("Senha incorreta")
         else:
             print("nenhum registro")
 
-class MenuScreen(MDScreen):
-    pass
+class LojaScreen(MDScreen):
+    def on_enter(self):
+        for x in range(25):
+            self.ids.container.add_widget(
+                MDListItem(
+                    MDListItemLeadingIcon(
+                        icon="shopping",
+                    ),
+                    MDListItemHeadlineText(
+                        text=f"Item {x}",
+                    ),
+                    MDListItemSupportingText(
+                        text=f"{x * 100}g",
+                    ),    
+                    MDListItemTertiaryText(
+                        text="Descricao mt foda do item de numero {x}",
+                        padding= [0, 10, 0, 0],
+                    ),
+                    
+                    pos_hint={"center_x": .5, "center_y": .5},
+                    size_hint_x=0.8,
+                    divider=True,
+                ) 
+            )
+               
 
 
 class MainApp(MDApp):    
@@ -67,7 +92,7 @@ class MainApp(MDApp):
         sm = MDScreenManager()
 
         sm.add_widget(LoginScreen(name='login'))
-        sm.add_widget(MenuScreen(name='menu'))
+        sm.add_widget(LojaScreen(name='loja'))
 
         return sm
         

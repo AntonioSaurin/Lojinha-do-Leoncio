@@ -2,6 +2,7 @@
 
 #:import utils kivy.utils
 
+
 <LoginScreen>:
 
     md_bg_color: app.theme_cls.surfaceColor
@@ -50,10 +51,40 @@
             text: "Logar"
             font_style: "Title"
 
-<MenuScreen>
+<LojaScreen>
 
-    MDLabel:
-        text: "Loja do Leoncio"
-        pos_hint: {"center_x": .5, "center_y": .85}
-        halign: "center"
-        font_style: "Display"
+    md_bg_color: app.theme_cls.surfaceColor
+    password:search
+
+    MDBoxLayout:
+        orientation:"vertical"
+        MDNavigationBar:
+            padding: 100, 30, 100, 30
+            spacing: 10
+            orientation:"horizontal"
+
+            MDTextField:
+                id: search
+                mode: "outlined"
+                padding: 0, 0, 0, 10
+                pos_hint: {"center_x": .5, "center_y": .65}
+
+                MDTextFieldHintText:
+                    text: "Pesquisar"
+                
+            MDFabButton:
+                icon: "magnify"
+                style: "small"
+                pos_hint: {"center_x": .5, "center_y": .65}
+
+
+
+    
+        MDBoxLayout:
+
+
+            MDScrollView:
+                padding: 30, 0, 30, 0
+
+                MDList:
+                    id:container
