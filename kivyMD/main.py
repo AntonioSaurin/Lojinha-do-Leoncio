@@ -55,17 +55,31 @@ class LoginScreen(MDScreen):
 class LojaScreen(MDScreen):
     def searching(self):
         data = self.search.text
-        self.ids.container.remove_widget('MDListItem')
+        # self.ids.container.remove_widget('MDListItem')
 
         if data == '':
             cursor.execute("SELECT * FROM itens")
             result = cursor.fetchall()
             for x in result:
+                if x[3] == "Tank":
+                    role = "shield"
+                elif x[3] == "Bruiser":
+                    role = "sword"
+                elif x[3] == "Mage":
+                    role = "magic-staff"
+                elif x[3] == "Support":
+                    role = "medication"
+                elif x[3] == "ADCarry":
+                    role = "bow-arrow"
+                elif x[3] == "Assassin":
+                    role = "knige-military"
+
                 print(x)
+
                 self.ids.container.add_widget(
                     MDListItem(
                         MDListItemLeadingIcon(
-                            icon="shopping",
+                            icon=role,
                         ),
                         MDListItemHeadlineText(
                             text=f"{x[1]}",
@@ -88,11 +102,25 @@ class LojaScreen(MDScreen):
             result = cursor.fetchall()
 
             for x in result:
+                if x[3] == "Tank":
+                    role = "shield"
+                elif x[3] == "Bruiser":
+                    role = "sword"
+                elif x[3] == "Mage":
+                    role = "magic-staff"
+                elif x[3] == "Support":
+                    role = "medication"
+                elif x[3] == "ADCarry":
+                    role = "bow-arrow"
+                elif x[3] == "Assassin":
+                    role = "knige-military"
+
                 print(x)
+
                 self.ids.container.add_widget(
                     MDListItem(
                         MDListItemLeadingIcon(
-                            icon="shopping",
+                            icon=role,
                         ),
                         MDListItemHeadlineText(
                             text=f"{x[1]}",
