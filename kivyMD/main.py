@@ -98,7 +98,7 @@ class LojaScreen(MDScreen):
                     ) 
                 )
         else:
-            cursor.execute("SELECT * FROM itens WHERE description = %s", (data, ))
+            cursor.execute(f"SELECT * FROM itens WHERE description LIKE '%{data}%'")
             result = cursor.fetchall()
 
             for x in result:
