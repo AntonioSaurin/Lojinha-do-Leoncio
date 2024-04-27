@@ -68,35 +68,36 @@
                 icon: "menu"
 
             MDNavigationRailItem
-
+                on_press: app.move("loja")
                 MDNavigationRailItemIcon:
                     icon: "shopping"
                 MDNavigationRailItemLabel:
                     text: "Loja"
-                    on__active: app.move("loja")
-
 
             MDNavigationRailItem
+                on_press: app.move("add")
                 MDNavigationRailItemIcon:
                     icon: "plus-thick"
                 MDNavigationRailItemLabel:
                     text: "Adicionar"
-                    on__active: app.move("add")
+                    
 
 
             MDNavigationRailItem
+                on_press: app.move("remove")
                 MDNavigationRailItemIcon:
                     icon: "trash-can"
                 MDNavigationRailItemLabel:
                     text: "Remover"
-                    on__active: app.move("remove")
+                    
 
             MDNavigationRailItem
+                on_press: app.move("edit")
                 MDNavigationRailItemIcon:
                     icon: "lead-pencil"
                 MDNavigationRailItemLabel:
                     text: "Editar"
-                    on__active: app.move("edit")
+                    
 
 
         MDBoxLayout:
@@ -237,7 +238,7 @@
     MDButton:
         style: "elevated"
         pos_hint: {"center_x": .5, "center_y": .15}
-        on_press: app.move("login")
+        on_press: app.move("loja")
         MDButtonText:
             text: "Voltar"
             font_style: "Title"
@@ -246,7 +247,7 @@
     MDButton:
         style: "elevated"
         pos_hint: {"center_x": .5, "center_y": .65}
-        on_press: app.move("login")
+        on_press: app.move("loja")
         MDButtonText:
             text: "Voltar"
             font_style: "Title"
@@ -256,7 +257,7 @@
     MDButton:
         style: "elevated"
         pos_hint: {"center_x": .5, "center_y": .65}
-        on_press: app.move("login")
+        on_press: app.move("loja")
         MDButtonText:
             text: "Voltar"
             font_style: "Title"

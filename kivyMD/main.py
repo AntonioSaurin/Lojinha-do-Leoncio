@@ -170,6 +170,7 @@ class EditScreen(MDScreen):
 
 class MainApp(MDApp):    
     def move(self, tela):
+        print(tela)
         if tela == "login":
             sm.current = "login"
         elif tela == "add":
@@ -177,9 +178,9 @@ class MainApp(MDApp):
         elif tela == "loja":
             sm.current = "loja"
         elif tela == "remove":
-            sm.current = "add"
+            sm.current = "remove"
         elif tela == "edit":
-            sm.current = "add"
+            sm.current = "edit"
         else:
             pass
     
