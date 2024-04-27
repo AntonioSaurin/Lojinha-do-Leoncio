@@ -10,6 +10,7 @@ from kivymd.uix.list import MDListItemSupportingText, MDListItem, MDListItemHead
 
 import mysql.connector
 
+
 #Aqui é onde passa o endereço da instancia do banco, junto com o login e a senha + o nome da database
 db = mysql.connector.connect(
     host='localhost',
@@ -30,10 +31,10 @@ class LoginScreen(MDScreen):
     user = ObjectProperty(None)
     password = ObjectProperty(None)
     search = ObjectProperty(None)
-
+    item_price = ObjectProperty(None)
+    item_name = ObjectProperty(None)
 
     def press(self):
-
         #Aqui é atribuido valor as variaveis
         user = (self.user.text,)
         password = self.password.text
@@ -66,7 +67,7 @@ class LojaScreen(MDScreen):
                 elif x[3] == "Bruiser":
                     role = "sword"
                 elif x[3] == "Mage":
-                    role = "magic-staff"
+                    role = "star-four-points"
                 elif x[3] == "Support":
                     role = "medication"
                 elif x[3] == "ADCarry":
@@ -113,7 +114,7 @@ class LojaScreen(MDScreen):
                 elif x[3] == "ADCarry":
                     role = "bow-arrow"
                 elif x[3] == "Assassin":
-                    role = "knige-military"
+                    role = "knife-military"
 
                 print(x)
 
@@ -138,10 +139,52 @@ class LojaScreen(MDScreen):
                         divider=True,
                     ) 
                 )
-               
 
+
+class AddScreen(MDScreen):
+
+    def selected_type(self, tipo):
+        global item_type
+        item_type = tipo
+
+
+    def adicionar(self):
+        try:
+            item_name = self.item_name.text
+            item_price = self.item_price.text          
+            print(item_type)
+
+            print(f"Nome: {item_name}, preço {item_price}, tipo: {item_type}")
+        except:
+            print("ËRRO!!!!!!!")
+        else:
+            pass
+
+
+
+class RemoveScreen(MDScreen):
+    pass
+
+class EditScreen(MDScreen):
+    pass
 
 class MainApp(MDApp):    
+    def move(self, tela):
+        if tela == "login":
+            sm.current = "login"
+        elif tela == "add":
+            sm.current = "add"
+        elif tela == "loja":
+            sm.current = "loja"
+        elif tela == "remove":
+            sm.current = "add"
+        elif tela == "edit":
+            sm.current = "add"
+        else:
+            pass
+    
+
+    
     def build(self):
         self.theme_cls.theme_style = "Light"
         self.theme_cls.primary_palette = "Pink"
@@ -156,6 +199,9 @@ class MainApp(MDApp):
 
         sm.add_widget(LoginScreen(name='login'))
         sm.add_widget(LojaScreen(name='loja'))
+        sm.add_widget(AddScreen(name='add'))
+        sm.add_widget(RemoveScreen(name='remove'))
+        sm.add_widget(EditScreen(name='edit'))
 
         return sm
         

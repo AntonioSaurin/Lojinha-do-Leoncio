@@ -10,6 +10,7 @@
     user:user
     password:password
 
+
     MDLabel:
         text: "Loja do Leoncio"
         pos_hint: {"center_x": .5, "center_y": .85}
@@ -52,49 +53,210 @@
             font_style: "Title"
 
 <LojaScreen>
+    on_pre_enter: root.searching()
 
     md_bg_color: app.theme_cls.surfaceColor
     search:search
-
     MDBoxLayout:
-        orientation:"vertical"
-        MDNavigationBar:
-            padding: 50, 30, 50, 30
-            spacing: 10
-            orientation:"horizontal"
+        orientation:"horizontal"
 
-            MDTextField:
-                id: search
-                mode: "outlined"
-                padding: 0, 0, 0, 10
-                pos_hint: {"center_x": .5, "center_y": .65}
+        MDNavigationRail:
+            type: "labeled"
+            anchor: "center"
 
-                MDTextFieldHintText:
-                    text: "Pesquisar"
-                
-            MDFabButton:
-                icon: "magnify"
-                style: "small"
-                pos_hint: {"center_x": .5, "center_y": .65}
-                on_press: root.searching()
-            
-            MDButton:
-                style: "elevated"
-                pos_hint: {"center_x": .5, "center_y": .65}
-                on_press: root.exit()
-                MDButtonText:
-                    text: "Voltar"
-                    font_style: "Title"
+            MDNavigationRailMenuButton:
+                icon: "menu"
+
+            MDNavigationRailItem
+
+                MDNavigationRailItemIcon:
+                    icon: "shopping"
+                MDNavigationRailItemLabel:
+                    text: "Loja"
+                    on__active: app.move("loja")
 
 
+            MDNavigationRailItem
+                MDNavigationRailItemIcon:
+                    icon: "plus-thick"
+                MDNavigationRailItemLabel:
+                    text: "Adicionar"
+                    on__active: app.move("add")
 
 
-    
+            MDNavigationRailItem
+                MDNavigationRailItemIcon:
+                    icon: "trash-can"
+                MDNavigationRailItemLabel:
+                    text: "Remover"
+                    on__active: app.move("remove")
+
+            MDNavigationRailItem
+                MDNavigationRailItemIcon:
+                    icon: "lead-pencil"
+                MDNavigationRailItemLabel:
+                    text: "Editar"
+                    on__active: app.move("edit")
+
+
         MDBoxLayout:
+            orientation:"vertical"
+            MDNavigationBar:
+                padding: 50, 30, 50, 30
+                spacing: 10
+                orientation:"horizontal"
+
+                MDTextField:
+                    id: search
+                    mode: "outlined"
+                    padding: 0, 0, 0, 10
+                    pos_hint: {"center_x": .5, "center_y": .65}
+
+                    MDTextFieldHintText:
+                        text: "Pesquisar"
+                    
+                MDFabButton:
+                    icon: "magnify"
+                    style: "small"
+                    pos_hint: {"center_x": .5, "center_y": .65}
+                    on_press: root.searching()
+
+            MDBoxLayout:
+                MDScrollView:
+                    padding: 30, 0, 30, 0
+                    MDList:
+                        id:container
 
 
-            MDScrollView:
-                padding: 30, 0, 30, 0
+<AddScreen>
+    md_bg_color: app.theme_cls.surfaceColor
 
-                MDList:
-                    id:container
+    item_name: item_name
+    item_price: item_price
+
+
+    MDLabel:
+        text: "Adicionar Itens"
+        pos_hint: {"center_x": .5, "center_y": .85}
+        halign: "center"
+        font_style: "Display"
+    
+    MDTextField:
+        id: item_name
+        mode: "outlined"
+        size_hint_x: None
+        width: "600dp"
+        pos_hint: {"center_x": .5, "center_y": .65}
+
+        MDTextFieldLeadingIcon:
+            icon: "rename-box"
+
+        MDTextFieldHintText:
+            text: "Nome"
+
+    MDTextField:
+        id: item_price
+        mode: "outlined"
+        size_hint_x: None
+        width: "600dp"
+        pos_hint: {"center_x": .5, "center_y": .50}
+        input_filter: 'int'
+
+        MDTextFieldLeadingIcon:
+            icon: "currency-usd"
+
+        MDTextFieldHintText:
+            text: "Preço"
+
+
+    FloatLayout:
+
+
+        MDSegmentedButton:
+            size: min(root.size), min(root.size)
+            size_hint: None, None
+            pos_hint: {'center_x': .5, 'center_y': .83}
+            id: segmentado
+
+            MDSegmentedButtonItem:
+                size_hint_x: None
+                on_press: root.selected_type("Tank")
+                MDSegmentButtonIcon:
+                    icon: "shield"
+                MDSegmentButtonLabel:
+                    text: "Tank"
+
+            MDSegmentedButtonItem:
+                size_hint_x: None
+                on_press: root.selected_type("Bruiser")
+                MDSegmentButtonIcon:
+                    icon: "sword"
+                MDSegmentButtonLabel:
+                    text: "Lutador"
+
+            MDSegmentedButtonItem:
+                size_hint_x: None
+                on_press: root.selected_type("Mage")
+                MDSegmentButtonIcon:
+                    icon: "magic-staff"
+                MDSegmentButtonLabel:
+                    text: "Mago"
+
+            MDSegmentedButtonItem:
+                size_hint_x: None
+                on_press: root.selected_type("Support")
+                MDSegmentButtonIcon:
+                    icon: "medication"
+                MDSegmentButtonLabel:
+                    text: "Suporte"
+
+            MDSegmentedButtonItem:
+                size_hint_x: None
+                on_press: root.selected_type("ADCarry")
+                MDSegmentButtonIcon:
+                    icon: "bow-arrow"
+                MDSegmentButtonLabel:
+                    text: "Atirador"
+
+            MDSegmentedButtonItem:
+                size_hint_x: None
+                on_press: root.selected_type("Assassin")
+                MDSegmentButtonIcon:
+                    icon: "knife-military"
+                MDSegmentButtonLabel:
+                    text: "Assassino"
+
+    MDButton:
+        style: "elevated"
+        pos_hint: {"center_x": .5, "center_y": .25}
+        on_press: root.adicionar()
+        MDButtonText:
+            text: "Enviar"
+            font_style: "Title"
+
+    MDButton:
+        style: "elevated"
+        pos_hint: {"center_x": .5, "center_y": .15}
+        on_press: app.move("login")
+        MDButtonText:
+            text: "Voltar"
+            font_style: "Title"
+
+<RemoveScreen>
+    MDButton:
+        style: "elevated"
+        pos_hint: {"center_x": .5, "center_y": .65}
+        on_press: app.move("login")
+        MDButtonText:
+            text: "Voltar"
+            font_style: "Title"
+
+
+<EditScreen>
+    MDButton:
+        style: "elevated"
+        pos_hint: {"center_x": .5, "center_y": .65}
+        on_press: app.move("login")
+        MDButtonText:
+            text: "Voltar"
+            font_style: "Title"
