@@ -7,7 +7,6 @@ from kivymd.uix.button import *
 from kivymd.uix.screenmanager import MDScreenManager
 from kivymd.uix.list import MDListItemSupportingText, MDListItem, MDListItemHeadlineText, MDListItemLeadingIcon, MDListItemTertiaryText
 
-
 import mysql.connector
 
 
@@ -33,6 +32,7 @@ class LoginScreen(MDScreen):
     search = ObjectProperty(None)
     item_price = ObjectProperty(None)
     item_name = ObjectProperty(None)
+    delete_txt = ObjectProperty(None)
 
     def press(self):
         #Aqui é atribuido valor as variaveis
@@ -163,7 +163,74 @@ class AddScreen(MDScreen):
 
 
 class RemoveScreen(MDScreen):
-    pass
+
+    global delete_item
+
+
+    def searching(self):
+        data = self.delete_txt.text
+        try:
+            self.ids.container_delete.remove_widget(MDListItem)
+        except:
+            print("ERRO")
+        else:
+            pass
+
+        if data == '':
+           #self.ids.tela_de_remover.add_widget()
+            pass
+
+        else:
+            cursor.execute(f"SELECT * FROM itens WHERE description LIKE '%{data}%' LIMIT 1;")
+            result = cursor.fetchall()
+
+            for x in result:
+                if x[3] == "Tank":
+                    role = "shield"
+                elif x[3] == "Bruiser":
+                    role = "sword"
+                elif x[3] == "Mage":
+                    role = "magic-staff"
+                elif x[3] == "Support":
+                    role = "medication"
+                elif x[3] == "ADCarry":
+                    role = "bow-arrow"
+                elif x[3] == "Assassin":
+                    role = "knife-military"
+
+                self.ids.container_delete.add_widget(
+                    MDListItem(
+                        MDListItemLeadingIcon(
+                            icon=role,
+                        ),
+                        MDListItemHeadlineText(
+                            text=f"{x[1]}",
+                        ),
+                        MDListItemSupportingText(
+                            text=f"{x[2]}g",
+                        ),    
+                        MDListItemTertiaryText(
+                            text=f"{x[3]}",
+                            padding= [0, 0, 0, 0],
+                        ),
+                        pos_hint={"center_x": .42, "center_y": .4},
+                        size_hint_x=0.8,
+                        divider=True,
+
+                    )
+                )
+                def delete_item(self):
+                    print("texto")
+                self.ids.container_delete.add_widget(
+                    MDFabButton(
+                        icon= "delete",
+                        style= "standard",
+                        pos_hint= {"center_x": .90, "center_y": .4},
+                        on_press= delete_item
+                    )
+                )
+
+
 
 class EditScreen(MDScreen):
     pass

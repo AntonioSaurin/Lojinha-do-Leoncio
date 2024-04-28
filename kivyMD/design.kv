@@ -244,13 +244,84 @@
             font_style: "Title"
 
 <RemoveScreen>
-    MDButton:
-        style: "elevated"
-        pos_hint: {"center_x": .5, "center_y": .65}
-        on_press: app.move("loja")
-        MDButtonText:
-            text: "Voltar"
-            font_style: "Title"
+    md_bg_color: app.theme_cls.surfaceColor
+
+    md_bg_color: app.theme_cls.surfaceColor
+    delete_txt: delete_txt
+
+    MDBoxLayout:
+        orientation:"horizontal"
+        id: tela_de_remover
+
+        MDNavigationRail:
+            type: "labeled"
+            anchor: "center"
+
+            MDNavigationRailMenuButton:
+                icon: "menu"
+
+            MDNavigationRailItem
+                on_press: app.move("loja")
+                MDNavigationRailItemIcon:
+                    icon: "shopping"
+                MDNavigationRailItemLabel:
+                    text: "Loja"
+            MDNavigationRailItem
+                on_press: app.move("add")
+                MDNavigationRailItemIcon:
+                    icon: "plus-thick"
+                MDNavigationRailItemLabel:
+                    text: "Adicionar"
+            MDNavigationRailItem
+                on_press: app.move("remove")
+                MDNavigationRailItemIcon:
+                    icon: "trash-can"
+                MDNavigationRailItemLabel:
+                    text: "Remover"
+            MDNavigationRailItem
+                on_press: app.move("edit")
+                MDNavigationRailItemIcon:
+                    icon: "lead-pencil"
+                MDNavigationRailItemLabel:
+                    text: "Editar"
+
+        MDFloatLayout:
+            orientation:"vertical"
+            padding: 50, 30, 50, 30
+            spacing: 10
+            id: container_delete
+
+            MDLabel:
+                text: "Deletar"
+                pos_hint: {"center_x": .5, "center_y": .80}
+                halign: "center"
+                font_style: "Display"
+
+            MDLabel:
+                text: "Digite o nome do item que deseja deletar:"
+                pos_hint: {"center_x": .5, "center_y": .70}
+                halign: "center"
+                font_style: "Headline"
+                role: "medium"
+
+            MDTextField:
+                padding: 50, 30, 50, 30
+                id: delete_txt
+                mode: "outlined"
+                padding: 0, 0, 0, 10
+                pos_hint: {"center_x": .42, "center_y": .55}
+                size_hint_x: .8
+                MDTextFieldHintText:
+                    text: "Deletar"
+                
+            MDFabButton:
+                icon: "magnify"
+                style: "standard"
+                pos_hint: {"center_x": .90, "center_y": .55}
+                on_press: root.searching()
+
+        
+
 
 
 <EditScreen>
