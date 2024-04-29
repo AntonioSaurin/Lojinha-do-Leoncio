@@ -269,10 +269,8 @@ class RemoveScreen(MDScreen):
     def edit_item(self):
         global edited_item
         edited_item = result
-        print(result)
-        print(edited_item[0][1])
-        sm.current = "edit"
-        EditScreen.selected
+        # EditScreen.item_name.text = result[0][1]
+        sm.current = "edit"        
         return
 
 
@@ -280,10 +278,11 @@ class RemoveScreen(MDScreen):
 
 
 class EditScreen(MDScreen):
-    global selected
+    
     def selected(self):
-        self.item_name.text = edited_item[1]
-        self.item_price.text = edited_item[2]
+        print("oi")
+        self.item_name.text = edited_item[0][1]
+        self.item_price.text = str(edited_item[0][2])
         
     
     def selected_type(self, tipo):
@@ -292,15 +291,19 @@ class EditScreen(MDScreen):
 
     def adicionar(self):
         try:
+            print("Oi") 
             item_name = self.item_name.text
             item_price = self.item_price.text          
             print(item_type)
+            sql = "UPDATE itens SET description = %s, value = %s, role = %s WHERE id = %s LIMIT 1"
+            data = (item_name, item_price, item_type, result[0][0])
 
-            print(f"Nome: {item_name}, preço {item_price}, tipo: {item_type}")
+            cursor.execute(sql, data)
+            db.commit()   
         except:
             print("ËRRO!!!!!!!")
         else:
-            pass
+            sm.current = "loja"
 
         
 
@@ -334,8 +337,8 @@ class MainApp(MDApp):
         
         sm = MDScreenManager()
 
-        sm.add_widget(LoginScreen(name='login'))
         sm.add_widget(RemoveScreen(name='remove'))
+        sm.add_widget(LoginScreen(name='login'))
         sm.add_widget(LojaScreen(name='loja'))
         sm.add_widget(AddScreen(name='add'))
         sm.add_widget(EditScreen(name='edit'))
