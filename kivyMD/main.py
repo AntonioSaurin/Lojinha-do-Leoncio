@@ -338,7 +338,6 @@ class MainApp(MDApp):
         sm.add_widget(RemoveScreen(name='remove'))
         sm.add_widget(LojaScreen(name='loja'))
         sm.add_widget(AddScreen(name='add'))
-
         sm.add_widget(EditScreen(name='edit'))
 
         return sm

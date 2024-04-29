@@ -23,6 +23,7 @@
         size_hint_x: None
         width: "500dp"
         pos_hint: {"center_x": .5, "center_y": .65}
+        write_tab: False
 
         MDTextFieldLeadingIcon:
             icon: "account"
@@ -37,6 +38,7 @@
         width: "500dp"
         pos_hint: {"center_x": .5, "center_y": .50}
         password: True
+        write_tab: False
 
         MDTextFieldLeadingIcon:
             icon: "account"
@@ -65,7 +67,8 @@
             anchor: "center"
 
             MDNavigationRailMenuButton:
-                icon: "menu"
+                icon: "logout"                
+                on_press: app.move("login")
 
             MDNavigationRailItem
                 on_press: app.move("loja")
@@ -86,17 +89,10 @@
             MDNavigationRailItem
                 on_press: app.move("remove")
                 MDNavigationRailItemIcon:
-                    icon: "trash-can"
-                MDNavigationRailItemLabel:
-                    text: "Remover"
-                    
-
-            MDNavigationRailItem
-                on_press: app.move("edit")
-                MDNavigationRailItemIcon:
                     icon: "lead-pencil"
                 MDNavigationRailItemLabel:
-                    text: "Editar"
+                    text: "Gerenciar"
+                    
                     
 
 
@@ -112,6 +108,7 @@
                     mode: "outlined"
                     padding: 0, 0, 0, 10
                     pos_hint: {"center_x": .5, "center_y": .65}
+                    write_tab: False
 
                     MDTextFieldHintText:
                         text: "Pesquisar"
@@ -144,7 +141,8 @@
             anchor: "center"
 
             MDNavigationRailMenuButton:
-                icon: "menu"
+                icon: "logout"                
+                on_press: app.move("login")
 
             MDNavigationRailItem
                 on_press: app.move("loja")
@@ -161,15 +159,11 @@
             MDNavigationRailItem
                 on_press: app.move("remove")
                 MDNavigationRailItemIcon:
-                    icon: "trash-can"
-                MDNavigationRailItemLabel:
-                    text: "Remover"
-            MDNavigationRailItem
-                on_press: app.move("edit")
-                MDNavigationRailItemIcon:
                     icon: "lead-pencil"
                 MDNavigationRailItemLabel:
-                    text: "Editar"
+                    text: "Gerenciar"
+
+
 
     MDLabel:
         text: "Adicionar Itens"
@@ -183,6 +177,7 @@
         size_hint_x: None
         width: "600dp"
         pos_hint: {"center_x": .5, "center_y": .65}
+        write_tab: False
 
         MDTextFieldLeadingIcon:
             icon: "rename-box"
@@ -197,6 +192,7 @@
         width: "600dp"
         pos_hint: {"center_x": .5, "center_y": .50}
         input_filter: 'int'
+        write_tab: False
 
         MDTextFieldLeadingIcon:
             icon: "currency-usd"
@@ -288,7 +284,8 @@
             anchor: "center"
 
             MDNavigationRailMenuButton:
-                icon: "menu"
+                icon: "logout"
+                on_press: app.move("login")
 
             MDNavigationRailItem
                 on_press: app.move("loja")
@@ -305,15 +302,11 @@
             MDNavigationRailItem
                 on_press: app.move("remove")
                 MDNavigationRailItemIcon:
-                    icon: "trash-can"
-                MDNavigationRailItemLabel:
-                    text: "Remover"
-            MDNavigationRailItem
-                on_press: app.move("edit")
-                MDNavigationRailItemIcon:
                     icon: "lead-pencil"
                 MDNavigationRailItemLabel:
-                    text: "Editar"
+                    text: "Gerenciar"
+
+
 
         MDFloatLayout:
             orientation:"vertical"
@@ -328,7 +321,7 @@
                 font_style: "Display"
 
             MDLabel:
-                text: "Digite o nome do item que deseja Gerenciar:"
+                text: "Digite o nome do item que deseja Gerenciar"
                 pos_hint: {"center_x": .5, "center_y": .70}
                 halign: "center"
                 font_style: "Headline"
@@ -341,8 +334,9 @@
                 padding: 0, 0, 0, 10
                 pos_hint: {"center_x": .43, "center_y": .55}
                 size_hint_x: .79
+                write_tab: False
                 MDTextFieldHintText:
-                    text: "Item que deseja gerenciar:"
+                    text: "Nome do Item"
                 
             MDFabButton:
                 icon: "magnify"
@@ -369,7 +363,8 @@
             anchor: "center"
 
             MDNavigationRailMenuButton:
-                icon: "menu"
+                icon: "logout"
+                on_press: app.move("login")
 
             MDNavigationRailItem
                 on_press: app.move("loja")
@@ -386,15 +381,11 @@
             MDNavigationRailItem
                 on_press: app.move("remove")
                 MDNavigationRailItemIcon:
-                    icon: "trash-can"
-                MDNavigationRailItemLabel:
-                    text: "Remover"
-            MDNavigationRailItem
-                on_press: app.move("edit")
-                MDNavigationRailItemIcon:
                     icon: "lead-pencil"
                 MDNavigationRailItemLabel:
-                    text: "Editar"
+                    text: "Gerenciar"
+
+
 
     MDLabel:
         text: "Editar"
@@ -409,6 +400,7 @@
         width: "600dp"
         pos_hint: {"center_x": .5, "center_y": .65}
         text: ""
+        write_tab: False
         MDTextFieldLeadingIcon:
             icon: "rename-box"
         MDTextFieldHintText:
@@ -423,6 +415,7 @@
         width: "600dp"
         pos_hint: {"center_x": .5, "center_y": .50}
         input_filter: 'int'
+        write_tab: False
 
         MDTextFieldLeadingIcon:
             icon: "currency-usd"
