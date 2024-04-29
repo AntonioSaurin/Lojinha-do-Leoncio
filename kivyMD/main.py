@@ -205,6 +205,7 @@ class RemoveScreen(MDScreen):
 
                 self.ids.container_delete.add_widget(
                     MDListItem(
+                        
                         MDListItemLeadingIcon(
                             icon=role,
                         ),
@@ -227,10 +228,16 @@ class RemoveScreen(MDScreen):
 
                 def delete_item(self):
                     print(result)
-                    # sql = "DELETE FROM itens WHERE id = %s"
-                    # where = (result[0], )
+                    try:
+                        sql = "DELETE FROM itens WHERE id = %s"
+                        where = (result[0][0], )
 
-                    # cursor.execute(sql, where)
+                        cursor.execute(sql, where)
+                        db.commit()
+                    except:
+                        print("ERROR!!")
+                    else:
+                        self.ids.container_delete.remove_widget(MDListItem)
                     
                 self.ids.container_delete.add_widget(
                     MDFabButton(
@@ -257,13 +264,20 @@ class RemoveScreen(MDScreen):
         print(result)
         print(edited_item[0][1])
         sm.current = "edit"
-        return(edited_item[0][1])
+        EditScreen.selected
+        return
 
 
 
 
 
 class EditScreen(MDScreen):
+    global selected
+    def selected(self):
+        self.item_name.text = edited_item[1]
+        self.item_price.text = edited_item[2]
+        print("oi")
+        
     
     def selected_type(self, tipo):
         global item_type
