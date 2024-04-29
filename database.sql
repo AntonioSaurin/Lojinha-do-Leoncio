@@ -18,4 +18,6 @@ create table `users`(
 `password` varchar(255),
 `function` enum('Admin', 'Buyer'),
 primary key(id)
-)
+);
+
+insert into `users` (`username`, `password`) values ('Leoncio', 'Admin');

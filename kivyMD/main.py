@@ -185,9 +185,6 @@ class RemoveScreen(MDScreen):
 
         else:
             cursor.execute(f"SELECT * FROM itens WHERE description LIKE '%{data}%' LIMIT 1;")
-            
-            global edited_item
-
 
             global result
             result = cursor.fetchall()
@@ -230,7 +227,11 @@ class RemoveScreen(MDScreen):
 
                 def delete_item(self):
                     print(result)
+                    # sql = "DELETE FROM itens WHERE id = %s"
+                    # where = (result[0], )
 
+                    # cursor.execute(sql, where)
+                    
                 self.ids.container_delete.add_widget(
                     MDFabButton(
                         icon= "delete",
@@ -247,7 +248,9 @@ class RemoveScreen(MDScreen):
                         on_press= edit_item
                     )
                 )
-    global edit_item
+            
+    
+
     def edit_item(self):
         global edited_item
         edited_item = result
@@ -255,6 +258,7 @@ class RemoveScreen(MDScreen):
         print(edited_item[0][1])
         sm.current = "edit"
         return(edited_item[0][1])
+
 
 
 
@@ -311,10 +315,10 @@ class MainApp(MDApp):
         sm = MDScreenManager()
 
         sm.add_widget(LoginScreen(name='login'))
-        sm.add_widget(RemoveScreen(name='remove'))
-        sm.add_widget(EditScreen(name='edit'))
         sm.add_widget(LojaScreen(name='loja'))
         sm.add_widget(AddScreen(name='add'))
+        sm.add_widget(RemoveScreen(name='remove'))
+        sm.add_widget(EditScreen(name='edit'))
 
         return sm
         
