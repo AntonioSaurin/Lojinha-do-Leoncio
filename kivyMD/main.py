@@ -73,7 +73,7 @@ class LojaScreen(MDScreen):
                 elif x[3] == "ADCarry":
                     role = "bow-arrow"
                 elif x[3] == "Assassin":
-                    role = "knige-military"
+                    role = "knife-military"
 
                 print(x)
 
@@ -152,13 +152,16 @@ class AddScreen(MDScreen):
         try:
             item_name = self.item_name.text
             item_price = self.item_price.text          
-            print(item_type)
+            
+            data = (item_name, item_price, item_type)
+            sql = "INSERT INTO itens (description, value, role) VALUES (%s, %s, %s)"
 
-            print(f"Nome: {item_name}, preço {item_price}, tipo: {item_type}")
+            cursor.execute(sql, data)
+            db.commit()
         except:
-            print("ËRRO!!!!!!!")
+            print("ERROR!!!")
         else:
-            pass
+            sm.current = "loja"
 
 
 
