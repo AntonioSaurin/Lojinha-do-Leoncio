@@ -97,7 +97,6 @@ class LoginScreen(MDScreen):
         result = cursor.fetchall()
 
         if result:
-            print(result)
             if password == result[0][2]:
                 self.password.text = ''
                 sm.current = "loja"
@@ -328,7 +327,6 @@ class RemoveScreen(MDScreen):
 class EditScreen(MDScreen):
     
     def selected(self):
-        print("oi")
         self.item_name.text = edited_item[0][1]
         self.item_price.text = str(edited_item[0][2])
         
@@ -339,7 +337,6 @@ class EditScreen(MDScreen):
 
     def adicionar(self):
         try:
-            print("Oi") 
             item_name = self.item_name.text
             item_price = self.item_price.text          
             print(item_type)
@@ -389,7 +386,6 @@ class MainApp(MDApp):
         sm.add_widget(LoginScreen(name='login'))
         sm.add_widget(LojaScreen(name='loja'))
         sm.add_widget(AddScreen(name='add'))
-
         sm.add_widget(EditScreen(name='edit'))
 
         return sm
