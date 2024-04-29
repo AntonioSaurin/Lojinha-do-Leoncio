@@ -18,4 +18,8 @@ py -m pip install mysql.connector
 
 -----------------------------------
 
+Credencias de Login
+Usuario: Leoncio
+Senha: Admin
+
 Caso encontrar algum problema, entrar em contato com os desenvolvedores
