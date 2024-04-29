@@ -135,6 +135,41 @@
     item_name: item_name
     item_price: item_price
 
+    MDBoxLayout:
+        orientation:"horizontal"
+        id: tela_de_remover
+
+        MDNavigationRail:
+            type: "labeled"
+            anchor: "center"
+
+            MDNavigationRailMenuButton:
+                icon: "menu"
+
+            MDNavigationRailItem
+                on_press: app.move("loja")
+                MDNavigationRailItemIcon:
+                    icon: "shopping"
+                MDNavigationRailItemLabel:
+                    text: "Loja"
+            MDNavigationRailItem
+                on_press: app.move("add")
+                MDNavigationRailItemIcon:
+                    icon: "plus-thick"
+                MDNavigationRailItemLabel:
+                    text: "Adicionar"
+            MDNavigationRailItem
+                on_press: app.move("remove")
+                MDNavigationRailItemIcon:
+                    icon: "trash-can"
+                MDNavigationRailItemLabel:
+                    text: "Remover"
+            MDNavigationRailItem
+                on_press: app.move("edit")
+                MDNavigationRailItemIcon:
+                    icon: "lead-pencil"
+                MDNavigationRailItemLabel:
+                    text: "Editar"
 
     MDLabel:
         text: "Adicionar Itens"
@@ -235,13 +270,6 @@
             text: "Enviar"
             font_style: "Title"
 
-    MDButton:
-        style: "elevated"
-        pos_hint: {"center_x": .5, "center_y": .15}
-        on_press: app.move("loja")
-        MDButtonText:
-            text: "Voltar"
-            font_style: "Title"
 
 <RemoveScreen>
     md_bg_color: app.theme_cls.surfaceColor
@@ -292,13 +320,13 @@
             id: container_delete
 
             MDLabel:
-                text: "Deletar"
+                text: "Gerenciar"
                 pos_hint: {"center_x": .5, "center_y": .80}
                 halign: "center"
                 font_style: "Display"
 
             MDLabel:
-                text: "Digite o nome do item que deseja deletar:"
+                text: "Digite o nome do item que deseja Gerenciar:"
                 pos_hint: {"center_x": .5, "center_y": .70}
                 halign: "center"
                 font_style: "Headline"
@@ -309,8 +337,8 @@
                 id: delete_txt
                 mode: "outlined"
                 padding: 0, 0, 0, 10
-                pos_hint: {"center_x": .42, "center_y": .55}
-                size_hint_x: .8
+                pos_hint: {"center_x": .43, "center_y": .55}
+                size_hint_x: .79
                 MDTextFieldHintText:
                     text: "Deletar"
                 
@@ -320,15 +348,151 @@
                 pos_hint: {"center_x": .90, "center_y": .55}
                 on_press: root.searching()
 
+            #MDFabButton:
+            #    icon: "lead-pencil"
+            #    style: "standard"
+            #    pos_hint: {"center_x": .80, "center_y": .55}
+            #    on_press: root.searching()
+
         
-
-
-
 <EditScreen>
+    md_bg_color: app.theme_cls.surfaceColor
+
+    item_name: item_name
+    item_price: item_price
+
+    on_pre_enter: app.tester()
+
+    MDBoxLayout:
+        orientation:"horizontal"
+        id: tela_de_remover
+
+        MDNavigationRail:
+            type: "labeled"
+            anchor: "center"
+
+            MDNavigationRailMenuButton:
+                icon: "menu"
+
+            MDNavigationRailItem
+                on_press: app.move("loja")
+                MDNavigationRailItemIcon:
+                    icon: "shopping"
+                MDNavigationRailItemLabel:
+                    text: "Loja"
+            MDNavigationRailItem
+                on_press: app.move("add")
+                MDNavigationRailItemIcon:
+                    icon: "plus-thick"
+                MDNavigationRailItemLabel:
+                    text: "Adicionar"
+            MDNavigationRailItem
+                on_press: app.move("remove")
+                MDNavigationRailItemIcon:
+                    icon: "trash-can"
+                MDNavigationRailItemLabel:
+                    text: "Remover"
+            MDNavigationRailItem
+                on_press: app.move("edit")
+                MDNavigationRailItemIcon:
+                    icon: "lead-pencil"
+                MDNavigationRailItemLabel:
+                    text: "Editar"
+
+    MDLabel:
+        text: "Editar"
+        pos_hint: {"center_x": .5, "center_y": .85}
+        halign: "center"
+        font_style: "Display"
+    
+    MDTextField:
+        id: item_name
+        mode: "outlined"
+        size_hint_x: None
+        width: "600dp"
+        pos_hint: {"center_x": .5, "center_y": .65}
+        text: ""
+        MDTextFieldLeadingIcon:
+            icon: "rename-box"
+        MDTextFieldHintText:
+            text: "Novo nome"
+
+
+
+    MDTextField:
+        id: item_price
+        mode: "outlined"
+        size_hint_x: None
+        width: "600dp"
+        pos_hint: {"center_x": .5, "center_y": .50}
+        input_filter: 'int'
+
+        MDTextFieldLeadingIcon:
+            icon: "currency-usd"
+
+        MDTextFieldHintText:
+            text: "Novo preço"
+
+
+
+    MDSegmentedButton:
+        size: min(root.size), min(root.size)
+        size_hint_x: 0.75
+        pos_hint: {'center_x': .5, 'center_y': .83}
+        id: segmentado
+
+        MDSegmentedButtonItem:
+            size_hint_x: None
+            on_press: root.selected_type("Tank")
+            MDSegmentButtonIcon:
+                icon: "shield"
+            MDSegmentButtonLabel:
+                text: "Tank"
+
+        MDSegmentedButtonItem:
+            size_hint_x: None
+            on_press: root.selected_type("Bruiser")
+            MDSegmentButtonIcon:
+                icon: "sword"
+            MDSegmentButtonLabel:
+                text: "Lutador"
+
+        MDSegmentedButtonItem:
+            size_hint_x: None
+            on_press: root.selected_type("Mage")
+            MDSegmentButtonIcon:
+                icon: "magic-staff"
+            MDSegmentButtonLabel:
+                text: "Mago"
+
+        MDSegmentedButtonItem:
+            size_hint_x: None
+            on_press: root.selected_type("Support")
+            MDSegmentButtonIcon:
+                icon: "medication"
+            MDSegmentButtonLabel:
+                text: "Suporte"
+
+        MDSegmentedButtonItem:
+            size_hint_x: None
+            on_press: root.selected_type("ADCarry")
+            MDSegmentButtonIcon:
+                icon: "bow-arrow"
+            MDSegmentButtonLabel:
+                text: "Atirador"
+
+        MDSegmentedButtonItem:
+            size_hint_x: None
+            on_press: root.selected_type("Assassin")
+            MDSegmentButtonIcon:
+                icon: "knife-military"
+            MDSegmentButtonLabel:
+                text: "Assassino"
+
     MDButton:
         style: "elevated"
-        pos_hint: {"center_x": .5, "center_y": .65}
-        on_press: app.move("loja")
+        pos_hint: {"center_x": .5, "center_y": .25}
+        on_press: root.adicionar()
         MDButtonText:
-            text: "Voltar"
+            text: "Enviar"
             font_style: "Title"

@@ -165,7 +165,7 @@ class AddScreen(MDScreen):
 class RemoveScreen(MDScreen):
 
     global delete_item
-
+    global edit_item
 
     def searching(self):
         data = self.delete_txt.text
@@ -182,6 +182,11 @@ class RemoveScreen(MDScreen):
 
         else:
             cursor.execute(f"SELECT * FROM itens WHERE description LIKE '%{data}%' LIMIT 1;")
+            
+            global edited_item
+
+
+            global result
             result = cursor.fetchall()
 
             for x in result:
@@ -213,27 +218,63 @@ class RemoveScreen(MDScreen):
                             text=f"{x[3]}",
                             padding= [0, 0, 0, 0],
                         ),
-                        pos_hint={"center_x": .42, "center_y": .4},
-                        size_hint_x=0.8,
+                        pos_hint={"center_x": .43, "center_y": .38},
+                        size_hint_x=0.79,
                         divider=True,
 
                     )
                 )
+
                 def delete_item(self):
-                    print("texto")
+                    print(result)
+
                 self.ids.container_delete.add_widget(
                     MDFabButton(
                         icon= "delete",
                         style= "standard",
-                        pos_hint= {"center_x": .90, "center_y": .4},
+                        pos_hint= {"center_x": .90, "center_y": .38},
                         on_press= delete_item
                     )
                 )
+                self.ids.container_delete.add_widget(
+                    MDFabButton(
+                        icon= "lead-pencil",
+                        style= "standard",
+                        pos_hint= {"center_x": .77, "center_y": .38},
+                        on_press= edit_item
+                    )
+                )
+    global edit_item
+    def edit_item(self):
+        global edited_item
+        edited_item = result
+        print(result)
+        print(edited_item[0][1])
+        sm.current = "edit"
+        return(edited_item[0][1])
+
 
 
 
 class EditScreen(MDScreen):
-    pass
+    
+    def selected_type(self, tipo):
+        global item_type
+        item_type = tipo
+
+    def adicionar(self):
+        try:
+            item_name = self.item_name.text
+            item_price = self.item_price.text          
+            print(item_type)
+
+            print(f"Nome: {item_name}, preço {item_price}, tipo: {item_type}")
+        except:
+            print("ËRRO!!!!!!!")
+        else:
+            pass
+
+        
 
 class MainApp(MDApp):    
     def move(self, tela):
@@ -252,7 +293,8 @@ class MainApp(MDApp):
             pass
     
 
-    
+
+
     def build(self):
         self.theme_cls.theme_style = "Light"
         self.theme_cls.primary_palette = "Pink"
@@ -265,11 +307,11 @@ class MainApp(MDApp):
         
         sm = MDScreenManager()
 
+        sm.add_widget(RemoveScreen(name='remove'))
         sm.add_widget(LoginScreen(name='login'))
+        sm.add_widget(EditScreen(name='edit'))
         sm.add_widget(LojaScreen(name='loja'))
         sm.add_widget(AddScreen(name='add'))
-        sm.add_widget(RemoveScreen(name='remove'))
-        sm.add_widget(EditScreen(name='edit'))
 
         return sm
         
