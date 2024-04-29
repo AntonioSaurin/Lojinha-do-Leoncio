@@ -7,7 +7,7 @@ use leoncioStore;
 create table `itens`(
 `id` int auto_increment,
 `description` varchar(50),
-`value` float,
+`value` int,
 `role` enum('Bruiser','Mage','Tank','Support','ADCarry','Assassin'),
 primary key(id)
 );
@@ -21,3 +21,5 @@ primary key(id)
 );
 
 insert into `users` (`username`, `password`) values ('Leoncio', 'Admin');
+
+select * from itens;
