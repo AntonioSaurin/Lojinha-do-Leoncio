@@ -16,12 +16,60 @@ import mysql.connector
 
 
 #Aqui é onde passa o endereço da instancia do banco, junto com o login e a senha + o nome da database
-db = mysql.connector.connect(
-    host='localhost',
-    username='root',
-    password='',
-    database='leoncioStore'
-)
+try:
+    db = mysql.connector.connect(
+        host='localhost',
+        username='root',
+        password='',
+        database='leoncioStore'
+    )
+except mysql.connector.errors.ProgrammingError:
+    db = mysql.connector.connect(
+        host='localhost',
+        username='root',
+        password='',
+    )
+    cursor = db.cursor()
+    
+    cursor.execute('''
+create database leoncioStore 
+default char set utf8mb4 
+default collate utf8mb4_general_ci;
+
+use leoncioStore;
+
+create table `itens`(
+`id` int auto_increment,
+`description` varchar(50),
+`value` int,
+`role` enum('Bruiser','Mage','Tank','Support','ADCarry','Assassin'),
+primary key(id)
+);
+
+create table `users`(
+`id` int auto_increment,
+`username` varchar(20) unique,
+`password` varchar(255),
+`function` enum('Admin', 'Buyer'),
+primary key(id)
+);
+
+insert into `users` (`username`, `password`) values ('Leoncio', 'Admin');
+
+insert into `itens` (`description`, `value`, `role`) values('Eclipse','2800','Assassin');
+insert into `itens` (`description`, `value`, `role`) values('Armadura de Warmog','3100','Tank');
+insert into `itens` (`description`, `value`, `role`) values('Cutelo Negro','3000','Bruiser');
+insert into `itens` (`description`, `value`, `role`) values('Força Do Vendaval','3400','ADCarry');
+insert into `itens` (`description`, `value`, `role`) values('Companheiro de Luden','2900','Mage');
+insert into `itens` (`description`, `value`, `role`) values('Cajado Aquafluxo','2300','Support');
+                   ''')
+    
+    db = mysql.connector.connect(
+        host='localhost',
+        username='root',
+        password='',
+        database='leoncioStore'
+    )
 
 #Esse é o cursor que vai execurar os comandos no bancopy 
 cursor = db.cursor()

@@ -1,32 +1,25 @@
-ESSA BOMBA TEM O IMPORT INTEIRO DO KIVY KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK
+Leôncio Hextec Store
+Desenvolvedores: Antonio Saurin e Fernando de Azevedo
 
-Ta tendo uma simplistica tela de login e a de menu, contendo o script de troca de tela e de guardar variavel
+------------IMPORTANTE------------
 
-Tentei deixar comentadinho entao deve ta de boa de entender, mas caso algo tenho ficado confuso me pergunta ai
+Antes de iniciar o programa certifique-se que o mySQL está up e localizado na porta 3306
 
-Label:
-            text: "Usuario"
-            font_size: 32
-        TextInput:
-            id:user
-            multiline:False
-            font_size: 32
-            size_hint: (1,0.5)
+O usuario do banco deve ser "root" e a senha deve estar vazia
 
-        
-        Label:
-            text: "Senha"
-            font_size: 32
-        TextInput:
-            id:password
-            multiline:False
-            password: True
-            font_size: 32
-            size_hint: (1,0.5)
+----------------------------------
 
-            Button:
-            text: "submit"
-            font_size: 32
-            on_press: root.press()
-            pos_hint: {'center_x': .5}
-            size_hint: (0.5,0.5)
+Caso queira executar o app apartir do código fonte é necessario instalar o kivyMD e o mySQL connector
+
+comandos:
+
+py -m pip install https://github.com/kivymd/KivyMD/archive/master.zip
+py -m pip install mysql.connector
+
+-----------------------------------
+
+Credencias de Login
+Usuario: Leoncio
+Senha: Admin
+
+Caso encontrar algum problema, entrar em contato com os desenvolvedores
