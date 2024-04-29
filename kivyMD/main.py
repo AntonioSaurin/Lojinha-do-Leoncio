@@ -334,8 +334,8 @@ class MainApp(MDApp):
         
         sm = MDScreenManager()
 
-        sm.add_widget(RemoveScreen(name='remove'))
         sm.add_widget(LoginScreen(name='login'))
+        sm.add_widget(RemoveScreen(name='remove'))
         sm.add_widget(LojaScreen(name='loja'))
         sm.add_widget(AddScreen(name='add'))
 
