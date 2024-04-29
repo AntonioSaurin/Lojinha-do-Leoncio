@@ -1,4 +1,5 @@
 from kivy.lang import Builder
+from kivy.app import App
 from kivymd.app import MDApp
 from kivy.properties import ObjectProperty
 from kivymd.uix.label import MDLabel
@@ -6,6 +7,10 @@ from kivymd.uix.screen import MDScreen
 from kivymd.uix.button import *
 from kivymd.uix.screenmanager import MDScreenManager
 from kivymd.uix.list import MDListItemSupportingText, MDListItem, MDListItemHeadlineText, MDListItemLeadingIcon, MDListItemTertiaryText
+from kivy.modules import inspector
+from kivy.core.window import Window
+from kivy.properties import DictProperty
+
 
 import mysql.connector
 
@@ -75,7 +80,6 @@ class LojaScreen(MDScreen):
                 elif x[3] == "Assassin":
                     role = "knife-military"
 
-                print(x)
 
                 self.ids.container.add_widget(
                     MDListItem(
@@ -116,7 +120,6 @@ class LojaScreen(MDScreen):
                 elif x[3] == "Assassin":
                     role = "knife-military"
 
-                print(x)
 
                 self.ids.container.add_widget(
                     MDListItem(
@@ -170,14 +173,14 @@ class RemoveScreen(MDScreen):
     global delete_item
     global edit_item
 
-    def searching(self):
+
+    def searching_edit(self):
+
+        #inspector.create_inspector(Window, self.ids.container_delete)
+
+        self.ids.container_delete_search.clear_widgets()
         data = self.delete_txt.text
-        try:
-            self.ids.container_delete.remove_widget(MDListItem)
-        except:
-            print("ERRO")
-        else:
-            pass
+        self.delete_txt.text = ''
 
         if data == '':
            #self.ids.tela_de_remover.add_widget()
@@ -203,7 +206,7 @@ class RemoveScreen(MDScreen):
                 elif x[3] == "Assassin":
                     role = "knife-military"
 
-                self.ids.container_delete.add_widget(
+                self.ids.container_delete_search.add_widget(
                     MDListItem(
                         
                         MDListItemLeadingIcon(
@@ -219,44 +222,49 @@ class RemoveScreen(MDScreen):
                             text=f"{x[3]}",
                             padding= [0, 0, 0, 0],
                         ),
-                        pos_hint={"center_x": .43, "center_y": .38},
+                        pos_hint={"center_x": .54, "center_y": .38},
                         size_hint_x=0.79,
                         divider=True,
-
+                        id="remove_lista"
                     )
                 )
 
-                def delete_item(self):
-                    print(result)
-                    try:
-                        sql = "DELETE FROM itens WHERE id = %s"
-                        where = (result[0][0], )
-
-                        cursor.execute(sql, where)
-                        db.commit()
-                    except:
-                        print("ERROR!!")
-                    else:
-                        self.ids.container_delete.remove_widget(MDListItem)
-                    
-                self.ids.container_delete.add_widget(
+                self.ids.container_delete_search.add_widget(
                     MDFabButton(
                         icon= "delete",
                         style= "standard",
-                        pos_hint= {"center_x": .90, "center_y": .38},
-                        on_press= delete_item
+                        pos_hint= {"center_x": 1.01, "center_y": .38},
+                        on_press= delete_item 
                     )
                 )
-                self.ids.container_delete.add_widget(
+                self.ids.container_delete_search.add_widget(
                     MDFabButton(
                         icon= "lead-pencil",
                         style= "standard",
-                        pos_hint= {"center_x": .77, "center_y": .38},
-                        on_press= edit_item
+                        pos_hint= {"center_x": .87, "center_y": .38},
+                        on_press= edit_item,
+                        #on_release= self.root.searching_edit
                     )
                 )
-            
-    
+
+        self.delete_txt.text = ''
+        #self.ids.container_delete_search.clear_widgets()
+
+    def delete_item(self):
+
+        #RemoveScreen.ids.container_delete_search.clear_widgets()
+        try:
+            sql = "DELETE FROM itens WHERE id = %s"
+            where = (result[0][0], )
+
+            cursor.execute(sql, where)
+            db.commit()
+            sm.current = "loja"
+        except:
+            print("ERROR!!")
+        else:
+            pass
+
 
     def edit_item(self):
         global edited_item
@@ -276,7 +284,6 @@ class EditScreen(MDScreen):
     def selected(self):
         self.item_name.text = edited_item[1]
         self.item_price.text = edited_item[2]
-        print("oi")
         
     
     def selected_type(self, tipo):
@@ -299,7 +306,6 @@ class EditScreen(MDScreen):
 
 class MainApp(MDApp):    
     def move(self, tela):
-        print(tela)
         if tela == "login":
             sm.current = "login"
         elif tela == "add":
@@ -328,10 +334,11 @@ class MainApp(MDApp):
         
         sm = MDScreenManager()
 
+        sm.add_widget(RemoveScreen(name='remove'))
         sm.add_widget(LoginScreen(name='login'))
         sm.add_widget(LojaScreen(name='loja'))
         sm.add_widget(AddScreen(name='add'))
-        sm.add_widget(RemoveScreen(name='remove'))
+
         sm.add_widget(EditScreen(name='edit'))
 
         return sm

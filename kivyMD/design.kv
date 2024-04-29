@@ -277,6 +277,8 @@
     md_bg_color: app.theme_cls.surfaceColor
     delete_txt: delete_txt
 
+    on_pre_enter: root.searching_edit()
+
     MDBoxLayout:
         orientation:"horizontal"
         id: tela_de_remover
@@ -340,19 +342,16 @@
                 pos_hint: {"center_x": .43, "center_y": .55}
                 size_hint_x: .79
                 MDTextFieldHintText:
-                    text: "Deletar"
+                    text: "Item que deseja gerenciar:"
                 
             MDFabButton:
                 icon: "magnify"
                 style: "standard"
                 pos_hint: {"center_x": .90, "center_y": .55}
-                on_press: root.searching()
+                on_press: root.searching_edit()
 
-            #MDFabButton:
-            #    icon: "lead-pencil"
-            #    style: "standard"
-            #    pos_hint: {"center_x": .80, "center_y": .55}
-            #    on_press: root.searching()
+            MDFloatLayout:
+                id:container_delete_search
 
         
 <EditScreen>
