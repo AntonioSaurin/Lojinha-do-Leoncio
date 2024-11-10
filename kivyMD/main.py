@@ -211,7 +211,7 @@ class AddScreen(MDScreen):
         except:
             print("ERROR!!!")
         else:
-            sm.current = "loja"
+            sm.current = "Loja"
 
 
 
